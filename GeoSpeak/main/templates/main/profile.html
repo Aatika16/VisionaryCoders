@@ -1,0 +1,209 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+/>
+<style>
+    body{
+font-family: sans-serif;
+margin: 0%;
+padding: 0%;
+background-color: #181C14;
+}
+h1{
+color: #fff;
+font-family: sans-serif;
+font-size: 60px;
+font-weight: 600;
+margin-bottom: 20px;
+}
+h2{
+color: #fff;
+font-family: sans-serif;
+font-size: 40px;
+margin-bottom: 20px;
+}
+.logo{
+width: 300px;
+margin-bottom: 15px;
+}
+.hero{
+justify-content: center;
+text-align: center;
+align-items: center;
+font-family: serif;
+top: 50%;
+transform: translate(0%,30%);
+}
+.hero2{
+justify-content: center;
+text-align: center;
+align-items: center;
+font-family: serif;
+top: 20%;
+transform: translate(0%, 5%);
+}
+.button-group{
+display: flex;
+justify-content: center;
+}
+.button{
+font-size: 20px;
+padding: 8px 32px;
+border-radius: 25px;
+font-family: sans-serif;
+font-weight: 600;
+background-color: #06D001;
+color: #181C14;
+}
+.input{
+padding: 12px 10px;
+width: 30%;
+border-radius: 10px;
+background-color: #06D001;
+border: 3px solid #9BEC00;
+}
+.input::placeholder{
+color: #181C14;
+}
+.input-div{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.select{
+width: 30%;
+padding: 12px 10px;
+border-radius: 10px;
+background-color: #06D001;
+border: 3px solid #9BEC00;
+}
+.create-account{
+font-size: 18px;
+font-family: sans-serif;
+color: #fff;
+}
+.create-account a{
+font-size: 18px;
+font-family: sans-serif;
+color: #06D001;
+text-decoration: none;
+}
+@media screen and (max-width:787px){
+.input{
+width: 100%;
+}
+}
+
+@media screen and (max-width:787px){
+.hero{
+top: 30%;
+transform: translate(0%, 30%);
+}
+.hero2{
+top: 10%;
+transform: translate(0%, 10%);
+}
+}
+
+@media screen and (max-width:787px){
+.select{
+width: 100%;
+}
+}
+
+</style>
+</head>
+<body>
+
+    <main>
+        <form method="post">
+            {% csrf_token %}
+        <div class="hero2">
+            <div class="container">
+                <img src="{% static 'logo.png' %}" alt="" class="logo" style="width: 200px;">
+                <h2>Profile</h2>
+                <div class="input-div">
+                    <!-- <input type="text" placeholder="Enter Your Name" required class="input mb-4"
+                    name="return render(request, 'main/login.html')" id="Name"> -->
+                    <input type="text" placeholder="Enter Your Email Address" class="input mb-4" name="email" id="email" value="{{ user_data.email|default:'' }}">
+
+            
+                    <select class="select mb-4" name="source" id="source">
+                        <option value="">Choose Your Spoken Language</option>
+                        <option value="en" {% if user_data.source == "en" %} selected {% endif %}>English</option>
+                        <option value="hi" {% if user_data.source == "hi" %} selected {% endif %}>Hindi</option>
+                        <option value="es" {% if user_data.source == "es" %} selected {% endif %}>Spanish</option>
+                        <option value="fr" {% if user_data.source == "fr" %} selected {% endif %}>French</option>
+                        <option value="ur" {% if user_data.source == "ur" %} selected {% endif %}>اردو (Urdu)</option>
+                        <option value="fr" {% if user_data.source == "fr" %} selected {% endif %}>Français (French)</option>
+                        <option value="de" {% if user_data.source == "de" %} selected {% endif %}>Deutsch (German)</option>
+                        <option value="zh" {% if user_data.source == "zh" %} selected {% endif %}{% if source_lang == 'zh-CN' %}selected{% endif %}>中文 (Chinese)</option>
+                        <option value="ar" {% if user_data.source == "ar" %} selected {% endif %}>العربية (Arabic)</option>
+                        <option value="ru" {% if user_data.source == "ru" %} selected {% endif %}>Русский (Russian)</option>
+                        <option value="pt" {% if user_data.source == "pt" %} selected {% endif %}>Português (Portuguese)</option>
+                        <option value="ja" {% if user_data.source == "ja" %} selected {% endif %}>日本語 (Japanese)</option>
+                        <option value="ko" {% if user_data.source == "ko" %} selected {% endif %}>한국어 (Korean)</option>
+                        <option value="it" {% if user_data.source == "it" %} selected {% endif %}>Italiano (Italian)</option>
+                        <option value="tr" {% if user_data.source == "tr" %} selected {% endif %}>Türkçe (Turkish)</option>
+                        <option value="nl" {% if user_data.source == "nl" %} selected {% endif %}>Nederlands (Dutch)</option>
+                        <option value="pl" {% if user_data.source == "pl" %} selected {% endif %}>Polski (Polish)</option>
+                  
+                 
+
+                    </select>
+
+                    <select class="select mb-4" name="target" id="target">
+                        <option value="">Choose Your Convert Language</option>
+                        <option value="en" {% if user_data.target == "en" %} selected {% endif %}>English</option>
+                        <option value="hi" {% if user_data.target == "hi" %} selected {% endif %}>Hindi</option>
+                        <option value="es" {% if user_data.target == "es" %} selected {% endif %}>Spanish</option>
+                        <option value="fr" {% if user_data.target == "fr" %} selected {% endif %}>French</option>
+                        <option value="ur" {% if user_data.target == "ur" %} selected {% endif %}>اردو (Urdu)</option>
+                        <option value="fr" {% if user_data.target == "fr" %} selected {% endif %}>Français (French)</option>
+                        <option value="de" {% if user_data.target == "de" %} selected {% endif %}>Deutsch (German)</option>
+                        <option value="zh" {% if user_data.target == "zh" %} selected {% endif %}{% if source_lang == 'zh-CN' %}selected{% endif %}>中文 (Chinese)</option>
+                        <option value="ar" {% if user_data.target == "ar" %} selected {% endif %}>العربية (Arabic)</option>
+                        <option value="ru" {% if user_data.target == "ru" %} selected {% endif %}>Русский (Russian)</option>
+                        <option value="pt" {% if user_data.target == "pt" %} selected {% endif %}>Português (Portuguese)</option>
+                        <option value="ja" {% if user_data.target == "ja" %} selected {% endif %}>日本語 (Japanese)</option>
+                        <option value="ko" {% if user_data.target == "ko" %} selected {% endif %}>한국어 (Korean)</option>
+                        <option value="it" {% if user_data.target == "it" %} selected {% endif %}>Italiano (Italian)</option>
+                        <option value="tr" {% if user_data.target == "tr" %} selected {% endif %}>Türkçe (Turkish)</option>
+                        <option value="nl" {% if user_data.target == "nl" %} selected {% endif %}>Nederlands (Dutch)</option>
+                        <option value="pl" {% if user_data.target == "pl" %} selected {% endif %}>Polski (Polish)</option>
+                  
+                    </select>
+                <input type="password" placeholder="Enter Your Password" class="input mb-4" name="password" id="password" value="{{ user_data.password|default:'' }}">
+                </div>
+                <button class="button mb-4" type="submit">
+                  Update
+                </button>
+            </div>
+        </div>
+    </form>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
